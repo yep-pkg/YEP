@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
-const { install } = require("./lib/install.js");
-const { search } = require("./lib/search.js");
-const { remove } = require("./lib/remove.js");
+import { install } from "./lib/install.js";
+import { search } from "./lib/search.js";
+import { remove } from "./lib/remove.js";
 
 const cmd = process.argv[2];
 const arg = process.argv[3];
