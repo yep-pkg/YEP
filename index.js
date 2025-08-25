@@ -53,9 +53,14 @@ switch (cmd) {
   }
   case "genconfig": {
     const fs = await import("fs");
-    const configPath = "/etc/yep/config.yaml";
+    const path = await import("path");
+    const configDir = "/etc/yep";
+    const configPath = path.join(configDir, "config.yaml");
     const defaultConfig = `repos:\n  main:\n    name: 'Main Repository'\n    url: 'https://yep-pkg.github.io/YEP-repo/'\n`;
     try {
+      if (!fs.existsSync(configDir)) {
+        fs.mkdirSync(configDir, { recursive: true });
+      }
       if (!fs.existsSync(configPath)) {
         fs.writeFileSync(configPath, defaultConfig);
         console.log(chalk.bgGreen("   SUCCESS   "), `Config generated at ${configPath}`);
