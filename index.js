@@ -3,12 +3,13 @@
 import { install } from "./lib/install.js";
 import { search } from "./lib/search.js";
 import { remove } from "./lib/remove.js";
+import chalk from "chalk";
 
 const cmd = process.argv[2];
 const arg = process.argv[3];
 
 if (!cmd) {
-  console.log("YEP - Yet another package manager")
+  console.log(chalk.blue("YEP"), "- Yet another package manager")
   console.log("The universal package manager")
   console.log("------->")
   console.log("help - All subcommands")
@@ -22,7 +23,7 @@ if (!cmd) {
 switch (cmd) {
   case "install":
     if (!arg) {
-      console.error("Specify a package name");
+      console.error(chalk.bgRed("   ERROR   "), "Specify a package name");
       process.exit(1);
     }
     install(arg);
@@ -39,7 +40,7 @@ switch (cmd) {
     process.exit(1)
   case "remove":
     if (!arg) {
-      console.error("Specify a package to remove");
+      console.error(chalk.bgRed("   ERROR   "), "Specify a package to remove");
       process.exit(1);
     }
     remove(arg);
@@ -47,12 +48,12 @@ switch (cmd) {
 
   case "search":
     if (!arg) {
-      console.error("Specify a search term");
+      console.error(chalk.bgRed("   ERROR   "), "Specify a search term");
       process.exit(1);
     }
     search(arg);
     break;
   default:
-    console.error(`Unknown command: ${cmd}`);
+    console.error(chalk.bgRed("   ERROR   "), `Unknown command: ${cmd}`);
     process.exit(1);
 }
